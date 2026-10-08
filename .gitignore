@@ -1,0 +1,7 @@
+out/
+# runtime data created by the website (contains password hashes + personal details) -- never commit these
+data/users.csv
+data/wishlist.csv
+data/cart.csv
+data/orders.csv
+photos_by_name/

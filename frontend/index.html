@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ShopSearch — Compare sellers, save more</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="logo" onclick="go('home')">Shop<span>Search</span></div>
+    <div class="search"><input id="searchBox" placeholder="Search for products, brands and categories..." onkeydown="if(event.key==='Enter')search()"><button onclick="search()">Search</button></div>
+    <div class="actions">
+      <button class="act" onclick="go('wishlist')" title="Wishlist"><span class="ico">♥</span><span class="lbl">Wishlist</span><b id="wishCount" class="cnt hidden">0</b></button>
+      <button class="act" onclick="go('orders')" title="My orders"><span class="ico">▤</span><span class="lbl">Orders</span></button>
+      <button class="act" onclick="go('cart')" title="Cart"><span class="ico">🛒</span><span class="lbl">Cart</span><b id="cartCount" class="cnt hidden">0</b></button>
+      <button class="act acct" id="acctBtn" onclick="accountClick()">Login</button>
+    </div>
+  </div>
+  <nav><button onclick="loadProducts()">All Products</button><button onclick="loadCategory('Electronics')">Electronics</button><button onclick="loadCategory('Mobiles')">Mobiles</button><button onclick="loadCategory('Computers & Accessories')">Computers</button><button onclick="loadCategory('Men\'s Fashion')">Men</button><button onclick="loadCategory('Women\'s Fashion')">Women</button><button onclick="loadCategory('Footwear')">Footwear</button><button onclick="loadCategory('Home & Kitchen')">Home</button><button onclick="loadCategory('Sports & Fitness')">Sports</button><button onclick="showCategories()">All Categories</button></nav>
+</header>
+
+<main>
+<div id="home">
+  <section class="hero"><div><div class="eyebrow">COMPARE SELLERS • SAVE MORE</div><h1>Same product.<br><span>Smarter price.</span></h1><p>2,000 products, every one sold by several sellers. We rank them by price, rating and delivery so you always see the best deal first.</p><button class="heroBtn" onclick="document.getElementById('productsTop').scrollIntoView({behavior:'smooth'})">Explore Products →</button></div><div class="heroArt"><div class="orb"></div><div class="floatCard">BEST PRICE<br><b>cheapest seller first</b></div><div class="floatCard second">TOP-K HEAP<br><b>BIGGEST SAVINGS</b></div></div></section>
+
+  <section class="tools"><div class="tool"><b>⌕ KMP Search</b><small>Fast exact pattern matching</small></div><div class="tool"><b>✦ Edit Distance DP</b><small>Typo-tolerant search</small></div><div class="tool"><b>↗ Randomized QuickSort</b><small>Sort by price &amp; rating</small></div><div class="tool"><b>▲ Top-K Heap</b><small>Recommendations &amp; top deals</small></div></section>
+
+  <section id="dealsSec" class="hidden"><div class="sectionHead"><div><h2>🔥 Top deals</h2><p>Products where picking the cheapest seller saves the most</p></div></div><div id="dealRow" class="dealRow"></div></section>
+
+  <section id="categories" class="hidden"><h2>Shop by Category</h2><div id="catGrid" class="catGrid"></div></section>
+
+  <section id="productsTop"><div class="sectionHead"><div><h2 id="heading">All Products</h2><p id="subheading">Showing products from the local CSV catalog</p></div><select id="sort" onchange="changeSort()"><option value="default">Recommended</option><option value="priceAsc">Price: Low to High</option><option value="priceDesc">Price: High to Low</option><option value="rating">Top Rated</option></select></div><div id="algo" class="algo"></div><div id="grid" class="grid"></div><div class="center"><button id="moreBtn" class="btn ghost hidden" onclick="loadMore()">Load more products</button></div></section>
+</div>
+
+<div id="page" class="pageWrap hidden"></div>
+</main>
+
+<div id="modal" class="modal hidden" onclick="if(event.target===this)closeModal()"><div class="modalBox"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+
+<div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()"><div class="modalBox authBox"><button class="close" onclick="closeAuth()">×</button>
+  <div class="tabs"><button id="tabLogin" class="on" onclick="authTab('login')">Login</button><button id="tabReg" onclick="authTab('register')">Create account</button></div>
+  <p id="authNote" class="muted"></p>
+  <div id="regNameRow" class="field hidden"><label>Your name</label><input id="aName" placeholder="e.g. Moksha" autocomplete="name"></div>
+  <div class="field"><label>Username</label><input id="aUser" placeholder="letters, digits . _ - @" autocomplete="username"></div>
+  <div class="field"><label>Password</label><input id="aPass" type="password" placeholder="at least 6 characters" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitAuth()"></div>
+  <div id="authErr" class="err hidden"></div>
+  <button id="authBtn" class="btn wide" onclick="submitAuth()">Login</button>
+</div></div>
+
+<div id="toast" class="toast hidden"></div>
+<footer><b>ShopSearch</b> — Academic DSA Project • Java • CSV files (no SQL) • KMP • Levenshtein DP • Randomized QuickSort • Top-K Heap • HashMap</footer>
+<script src="script.js"></script>
+</body></html>
